@@ -23,6 +23,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.register(UINib(nibName: K.messageTableViewCell, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         // Do any additional setup after loading the view.
     }
 }
@@ -35,8 +37,9 @@ extension ViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = self.messages[indexPath.row].body
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageTableViewCell
+        cell.messageLabel.text = self.messages[indexPath.row].body
+        //cell.textLabel?.text = self.messages[indexPath.row].body
         return cell
     }
 }
